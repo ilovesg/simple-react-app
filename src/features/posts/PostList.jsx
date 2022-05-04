@@ -12,6 +12,7 @@ export default function PostsList() {
       <h1>Post list</h1>
       <PostsForm />
       <ListGroup as="ul">
+        <h2>Posts</h2>
         {
           posts.map((post) => (
             <PostItem post={post} key={post.id} />
