@@ -1,7 +1,7 @@
 {
   "name": "simple-react-app",
   "version": "0.1.0",
-  "homepage": "https://ilovesg.github.io",
+  "homepage": "https://ilovesg.github.io/simple-react-app",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
