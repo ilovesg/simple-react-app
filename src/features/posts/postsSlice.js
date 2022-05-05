@@ -25,8 +25,8 @@ export const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    addPost: (state) => {
-      state.value += 1;
+    addPost: (state, action) => {
+      state.posts.push(action.payload);
     },
     removePost: (state) => {
       state.value -= 1;
