@@ -14,9 +14,11 @@ export default function PostsList() {
       <ListGroup as="ul">
         <h2>Posts</h2>
         {
-          posts.map((post) => (
-            <PostItem post={post} key={post.id} />
-          ))
+          (posts.length !== 0)
+            ? posts.map((post) => (
+              <PostItem post={post} key={post.id} />
+            ))
+            : 'No posts yet.'
         }
       </ListGroup>
     </div>

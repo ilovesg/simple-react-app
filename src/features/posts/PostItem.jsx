@@ -1,7 +1,11 @@
 import React from 'react';
 import { ListGroup, Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { removePost } from './postsSlice';
 
 export default function PostItem({ post }) {
+  const dispatch = useDispatch();
+
   return (
     <ListGroup.Item
       as="li"
@@ -13,7 +17,7 @@ export default function PostItem({ post }) {
         </h5>
         {post.body}
       </div>
-      <Button variant="danger">&times; Delete</Button>
+      <Button variant="danger" onClick={() => dispatch(removePost(post.id))}>Delete</Button>
     </ListGroup.Item>
   );
 }

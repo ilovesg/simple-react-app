@@ -28,8 +28,8 @@ export const postsSlice = createSlice({
     addPost: (state, action) => {
       state.posts.push(action.payload);
     },
-    removePost: (state) => {
-      state.value -= 1;
+    removePost: (state, action) => {
+      state.posts = state.posts.filter((post) => post.id !== action.payload);
     },
   },
 });
