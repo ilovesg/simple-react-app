@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ListGroup } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import PostItem from './PostItem';
 import PostsForm from './PostForm';
 
@@ -11,16 +11,26 @@ export default function PostsList() {
     <div className="post-list">
       <h1>Post list</h1>
       <PostsForm />
-      <ListGroup as="ul">
-        <h2>Posts</h2>
-        {
-          (posts.length !== 0)
-            ? posts.map((post) => (
+      <h2>Posts</h2>
+      {posts.length !== 0 ? (
+        <Table responsive>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Title</th>
+              <th>Body</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {posts.map((post) => (
               <PostItem post={post} key={post.id} />
-            ))
-            : 'No posts yet.'
-        }
-      </ListGroup>
+            ))}
+          </tbody>
+        </Table>
+      ) : (
+        'No posts yet.'
+      )}
     </div>
   );
 }
