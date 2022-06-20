@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table } from 'react-bootstrap';
 import PostItem from './PostItem';
 import PostsForm from './PostForm';
-import { sortPosts, selectSort } from './postsSlice';
+import { sortPosts, selectSort, selectPosts } from './postsSlice';
 
 export default function PostsList() {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts.posts);
+  const posts = useSelector(selectPosts);
   const sort = useSelector(selectSort);
 
   useEffect(() => {

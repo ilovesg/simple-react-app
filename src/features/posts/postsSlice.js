@@ -50,6 +50,7 @@ export const postsSlice = createSlice({
 
 export const { addPost, removePost, sortPosts } = postsSlice.actions;
 
+export const selectPosts = (state) => state.posts.posts;
 export const selectSort = (state) => state.posts.sort;
 
 export default postsSlice.reducer;
