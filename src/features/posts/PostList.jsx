@@ -1,11 +1,28 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Table } from 'react-bootstrap';
 import PostItem from './PostItem';
 import PostsForm from './PostForm';
+import { sortPosts, selectSort } from './postsSlice';
 
 export default function PostsList() {
+  const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
+  const sort = useSelector(selectSort);
+
+  useEffect(() => {
+    dispatch(sortPosts(sort));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
+  const sortHandler = (field = 'id') => {
+    if (field === sort.field) {
+      const order = -sort.order;
+      dispatch(sortPosts({ field, order }));
+    } else {
+      dispatch(sortPosts({ field, order: 1 }));
+    }
+  };
 
   return (
     <div className="post-list">
@@ -16,9 +33,9 @@ export default function PostsList() {
         <Table responsive>
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Title</th>
-              <th>Body</th>
+              <th onClick={() => sortHandler('id')}>ID</th>
+              <th onClick={() => sortHandler('title')}>Title</th>
+              <th onClick={() => sortHandler('body')}>Body</th>
               <th>Delete</th>
             </tr>
           </thead>
