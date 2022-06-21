@@ -4,6 +4,7 @@ import { Table } from 'react-bootstrap';
 import PostItem from './PostItem';
 import PostsForm from './PostForm';
 import { sortPosts, selectSort, selectPosts } from './postsSlice';
+import styles from './PostList.module.scss';
 
 export default function PostsList() {
   const dispatch = useDispatch();
@@ -17,10 +18,10 @@ export default function PostsList() {
 
   const sortHandler = (field = 'id') => {
     if (field === sort.field) {
-      const order = -sort.order;
+      const order = (sort.order === 'asc') ? 'desc' : 'asc';
       dispatch(sortPosts({ field, order }));
     } else {
-      dispatch(sortPosts({ field, order: 1 }));
+      dispatch(sortPosts({ field, order: 'asc' }));
     }
   };
 
@@ -33,10 +34,22 @@ export default function PostsList() {
         <Table responsive>
           <thead>
             <tr>
-              <th onClick={() => sortHandler('id')}>ID</th>
-              <th onClick={() => sortHandler('title')}>Title</th>
-              <th onClick={() => sortHandler('body')}>Body</th>
-              <th>Delete</th>
+              {Object.keys(posts[0]).map((value) => (
+                <th>
+                  <button
+                    type="button"
+                    className={
+                      value === sort.field
+                        ? [styles['sort-button'], styles[`sort-button--${sort.order}`]].join(' ')
+                        : styles['sort-button']
+                    }
+                    onClick={() => sortHandler(value)}
+                  >
+                    {value}
+                  </button>
+                </th>
+              ))}
+              <th>delete</th>
             </tr>
           </thead>
           <tbody>

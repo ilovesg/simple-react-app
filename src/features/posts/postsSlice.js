@@ -21,7 +21,7 @@ const initialState = {
   status: 'idle',
   sort: {
     field: 'id',
-    order: 1,
+    order: 'asc',
   },
 };
 
@@ -42,7 +42,11 @@ export const postsSlice = createSlice({
         const a = post1[payload.field];
         const b = post2[payload.field];
 
-        return a.toString().localeCompare(b) * payload.order;
+        if (payload.order === 'asc') {
+          return a.toString().localeCompare(b);
+        }
+
+        return b.toString().localeCompare(a);
       });
     },
   },
