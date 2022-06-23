@@ -23,6 +23,10 @@ const initialState = {
     field: 'id',
     order: 'asc',
   },
+  filter: {
+    filterBy: 'title',
+    filterQuery: '',
+  },
 };
 
 export const postsSlice = createSlice({
@@ -49,12 +53,21 @@ export const postsSlice = createSlice({
         return b.toString().localeCompare(a);
       });
     },
+    defineFilter: (state, { payload }) => {
+      state.filter = payload;
+    },
   },
 });
 
-export const { addPost, removePost, sortPosts } = postsSlice.actions;
+export const {
+  addPost,
+  removePost,
+  sortPosts,
+  defineFilter,
+} = postsSlice.actions;
 
 export const selectPosts = (state) => state.posts.posts;
 export const selectSort = (state) => state.posts.sort;
+export const selectFilter = (state) => state.posts.filter;
 
 export default postsSlice.reducer;
