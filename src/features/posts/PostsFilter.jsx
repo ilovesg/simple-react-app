@@ -15,8 +15,7 @@ export default function PostFilter() {
 
   useEffect(() => {
     dispatch(defineFilter(filter));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filter]);
+  }, [dispatch, filter]);
 
   return (
     <Row className="mb-3">
