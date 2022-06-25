@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import PostItem from './PostItem';
 import PostsForm from './PostForm';
 import PostsFilter from './PostsFilter';
+import Modal from '../modal/Modal';
 import {
   sortPosts,
   selectSort,
@@ -17,6 +18,7 @@ export default function PostsList() {
   const posts = useSelector(selectPosts);
   const sort = useSelector(selectSort);
   const filter = useSelector(selectFilter);
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     dispatch(sortPosts(sort));
@@ -41,9 +43,14 @@ export default function PostsList() {
   return (
     <div className="post-list">
       <h1>Post list</h1>
-      <PostsForm />
       <PostsFilter />
       <h2>Posts</h2>
+      <Button variant="primary" type="button" onClick={() => setModal(true)}>
+        Create post
+      </Button>
+      <Modal visible={modal} setVisible={setModal}>
+        <PostsForm setVisible={setModal} />
+      </Modal>
       {resultPosts.length !== 0 ? (
         <Table responsive>
           <thead>

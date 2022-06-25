@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { addPost } from './postsSlice';
 
-export default function PostForm() {
+export default function PostForm({ setVisible }) {
   const dispatch = useDispatch();
   const [post, setPost] = useState({ title: '', body: '' });
 
@@ -15,6 +15,7 @@ export default function PostForm() {
     dispatch(addPost({ ...post, id: Date.now() }));
 
     setPost({ title: '', body: '' });
+    setVisible(false);
   };
 
   return (
