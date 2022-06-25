@@ -22,11 +22,11 @@ export default function PostFilter() {
     <Row className="mb-3">
       <Col>
         <h2>Search post</h2>
-        <DropdownButton id="dropdown-basic-button" title={`Search by: ${filter.searchBy}`} className="mb-3">
-          <Dropdown.Item onClick={() => setFilter({ ...filter, searchBy: 'title' })}>Title</Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter({ ...filter, searchBy: 'body' })}>Body</Dropdown.Item>
+        <DropdownButton id="dropdown-basic-button" title={`Search by: ${filter.filterBy}`} className="mb-3">
+          <Dropdown.Item onClick={() => setFilter({ ...filter, filterBy: 'title' })}>Title</Dropdown.Item>
+          <Dropdown.Item onClick={() => setFilter({ ...filter, filterBy: 'body' })}>Body</Dropdown.Item>
         </DropdownButton>
-        <Form.Control type="text" placeholder="Search post.." value={filter.searchQuery} onChange={(event) => setFilter({ ...filter, searchQuery: event.target.value })} />
+        <Form.Control type="text" placeholder="Search post.." value={filter.filterQuery} onChange={(event) => setFilter({ ...filter, filterQuery: event.target.value })} />
       </Col>
     </Row>
   );
