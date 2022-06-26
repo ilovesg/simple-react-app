@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Button } from 'react-bootstrap';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PostItem from './PostItem';
 import PostsForm from './PostForm';
 import PostsFilter from './PostsFilter';
@@ -73,11 +74,22 @@ export default function PostsList() {
               <th>delete</th>
             </tr>
           </thead>
-          <tbody>
+          <TransitionGroup component="tbody">
             {resultPosts.map((post) => (
-              <PostItem post={post} key={post.id} />
+              <CSSTransition
+                timeout={300}
+                key={post.id}
+                classNames={{
+                  enter: styles['post-enter'],
+                  enterActive: styles['post-enter-active'],
+                  exit: styles['post-exit'],
+                  exitActive: styles['post-exit-active'],
+                }}
+              >
+                <PostItem post={post} className={styles.post} />
+              </CSSTransition>
             ))}
-          </tbody>
+          </TransitionGroup>
         </Table>
       ) : (
         'No posts found.'

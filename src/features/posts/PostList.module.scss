@@ -16,3 +16,27 @@
     color: #0a58ca;
   }
 }
+
+.post {
+  &-enter {
+    opacity: 0;
+    transform: translateX(-350px);
+  }
+
+  &-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 300ms ease-in;
+  }
+
+  &-exit {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transform: translateX(-350px);
+    transition: all 300ms ease-in;
+  }
+}
