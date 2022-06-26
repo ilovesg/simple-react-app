@@ -27,9 +27,10 @@ export default function PostsList() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const sortHandler = (field = 'id') => {
+  const sortHandler = (field = sort.field) => {
     if (field === sort.field) {
       const order = (sort.order === 'asc') ? 'desc' : 'asc';
+
       dispatch(sortPosts({ field, order }));
     } else {
       dispatch(sortPosts({ field, order: 'asc' }));
