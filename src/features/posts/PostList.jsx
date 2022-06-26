@@ -13,6 +13,7 @@ import {
   selectFilter,
 } from './postsSlice';
 import styles from './PostList.module.scss';
+import usePosts from './usePosts';
 
 export default function PostsList() {
   const dispatch = useDispatch();
@@ -35,11 +36,7 @@ export default function PostsList() {
     }
   };
 
-  const getFilteredPosts = ({ filterBy, filterQuery }) => posts.filter(
-    (post) => post[filterBy].includes(filterQuery),
-  );
-
-  const resultPosts = getFilteredPosts(filter);
+  const resultPosts = usePosts(posts, filter);
 
   return (
     <div className="post-list">
