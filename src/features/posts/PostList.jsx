@@ -45,10 +45,12 @@ export default function PostsList() {
     <div className="post-list">
       <h1>Post list</h1>
       <PostsFilter />
-      <h2>Posts</h2>
-      <Button variant="primary" type="button" onClick={() => setModal(true)}>
-        Create post
-      </Button>
+      <h2 className="d-flex">
+        Posts
+        <Button variant="primary" type="button" className="ms-2" onClick={() => setModal(true)}>
+          Create post
+        </Button>
+      </h2>
       <Modal visible={modal} setVisible={setModal}>
         <PostsForm setVisible={setModal} />
       </Modal>
