@@ -56,22 +56,46 @@ export default function PostsList() {
         <Table responsive>
           <thead>
             <tr>
-              {Object.keys(posts[0]).map((value) => (
-                <th>
-                  <button
-                    type="button"
-                    className={
-                      value === sort.field
-                        ? [styles['sort-button'], styles[`sort-button--${sort.order}`]].join(' ')
-                        : styles['sort-button']
-                    }
-                    onClick={() => sortHandler(value)}
-                  >
-                    {value}
-                  </button>
-                </th>
-              ))}
-              <th>delete</th>
+              <th>
+                <button
+                  type="button"
+                  className={
+                    sort.field === 'id'
+                      ? [styles['sort-button'], styles[`sort-button--${sort.order}`]].join(' ')
+                      : styles['sort-button']
+                  }
+                  onClick={() => sortHandler('id')}
+                >
+                  ID
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  className={
+                    sort.field === 'title'
+                      ? [styles['sort-button'], styles[`sort-button--${sort.order}`]].join(' ')
+                      : styles['sort-button']
+                  }
+                  onClick={() => sortHandler('title')}
+                >
+                  Title
+                </button>
+              </th>
+              <th>
+                <button
+                  type="button"
+                  className={
+                    sort.field === 'body'
+                      ? [styles['sort-button'], styles[`sort-button--${sort.order}`]].join(' ')
+                      : styles['sort-button']
+                  }
+                  onClick={() => sortHandler('body')}
+                >
+                  Body
+                </button>
+              </th>
+              <th>Delete</th>
             </tr>
           </thead>
           <TransitionGroup component="tbody">
