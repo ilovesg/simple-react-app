@@ -33,6 +33,9 @@ export const postsSlice = createSlice({
     removePost: (state, action) => {
       state.posts = state.posts.filter((post) => post.id !== action.payload);
     },
+    definePosts: (state, { payload }) => {
+      state.posts = payload;
+    },
     sortPosts: (state, { payload }) => {
       state.sort = payload;
 
@@ -64,6 +67,7 @@ export const postsSlice = createSlice({
 });
 
 export const {
+  definePosts,
   addPost,
   removePost,
   sortPosts,

@@ -7,6 +7,7 @@ import PostsForm from './PostForm';
 import PostsFilter from './PostsFilter';
 import Modal from '../modal/Modal';
 import {
+  definePosts,
   sortPosts,
   selectSort,
   selectPosts,
@@ -54,6 +55,9 @@ export default function PostsList() {
         </Button>
         <Button variant="primary" type="button" className="ms-2" onClick={() => dispatch(addPostsAsync())}>
           Fetch posts
+        </Button>
+        <Button variant="primary" type="button" className="ms-2" onClick={() => dispatch(definePosts([]))}>
+          Clear posts
         </Button>
       </h2>
       <Modal visible={modal} setVisible={setModal}>
