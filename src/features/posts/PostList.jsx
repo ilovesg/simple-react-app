@@ -11,6 +11,7 @@ import {
   selectSort,
   selectPosts,
   selectFilter,
+  addPostsAsync,
 } from './postsSlice';
 import styles from './PostList.module.scss';
 import usePosts from './usePosts';
@@ -23,9 +24,12 @@ export default function PostsList() {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
+    dispatch(addPostsAsync());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(sortPosts(sort));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, posts, sort]);
 
   const sortHandler = (field = sort.field) => {
     if (field === sort.field) {
@@ -47,6 +51,9 @@ export default function PostsList() {
         Posts
         <Button variant="primary" type="button" className="ms-2" onClick={() => setModal(true)}>
           Create post
+        </Button>
+        <Button variant="primary" type="button" className="ms-2" onClick={() => dispatch(addPostsAsync())}>
+          Fetch posts
         </Button>
       </h2>
       <Modal visible={modal} setVisible={setModal}>

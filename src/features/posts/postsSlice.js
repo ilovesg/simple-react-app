@@ -1,23 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import fetchPosts from './postsAPI';
 
 const initialState = {
-  posts: [
-    {
-      id: 3,
-      title: 'A sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-      body: 'Z quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
-    },
-    {
-      id: 1,
-      title: 'C sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-      body: 'Y quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
-    },
-    {
-      id: 2,
-      title: 'B sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-      body: 'X quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto',
-    },
-  ],
+  posts: [],
   status: 'idle',
   sort: {
     field: 'id',
@@ -28,6 +13,15 @@ const initialState = {
     filterQuery: '',
   },
 };
+
+export const addPostsAsync = createAsyncThunk(
+  'posts/fetchPosts',
+  async () => {
+    const response = await fetchPosts();
+
+    return response.data;
+  },
+);
 
 export const postsSlice = createSlice({
   name: 'posts',
@@ -56,6 +50,16 @@ export const postsSlice = createSlice({
     defineFilter: (state, { payload }) => {
       state.filter = payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(addPostsAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(addPostsAsync.fulfilled, (state, { payload }) => {
+        state.status = 'idle';
+        state.posts = payload;
+      });
   },
 });
 
