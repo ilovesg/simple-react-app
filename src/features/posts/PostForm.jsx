@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPost, selectSort, sortPosts } from './postsSlice';
+import {
+  addPost,
+  selectPosts,
+  selectSort,
+  sortPosts,
+} from './postsSlice';
 
 export default function PostForm({ setVisible }) {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort);
+  const posts = useSelector(selectPosts);
   const [post, setPost] = useState({ title: '', body: '' });
 
   const addNewPost = (event) => {
@@ -13,7 +19,7 @@ export default function PostForm({ setVisible }) {
 
     if (post.title === '' || post.body === '') return;
 
-    dispatch(addPost({ ...post, id: Date.now() }));
+    dispatch(addPost({ ...post, id: posts.length + 1 }));
     dispatch(sortPosts(sort));
 
     setPost({ title: '', body: '' });
