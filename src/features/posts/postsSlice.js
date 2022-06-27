@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import fetchPosts from './postsAPI';
+import fetchPosts, { compareAsNumbers, compareAsStrings } from './postsAPI';
 
 const initialState = {
   posts: [],
@@ -43,11 +43,11 @@ export const postsSlice = createSlice({
         const a = post1[payload.field];
         const b = post2[payload.field];
 
-        if (payload.order === 'asc') {
-          return a.toString().localeCompare(b);
+        if (payload.field === 'id') {
+          return compareAsNumbers(a, b);
         }
 
-        return b.toString().localeCompare(a);
+        return compareAsStrings(a, b);
       });
     },
     defineFilter: (state, { payload }) => {
