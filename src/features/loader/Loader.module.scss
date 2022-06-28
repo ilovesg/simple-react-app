@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.loader {
+  width: 120px;
+  height: 120px;
+  animation: scale-loader 1s infinite linear;
+  background: no-repeat center/100% url("../../../public/favicon.png");
+}
+
+@keyframes scale-loader {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.4);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

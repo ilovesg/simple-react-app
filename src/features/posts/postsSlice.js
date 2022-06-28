@@ -77,5 +77,6 @@ export const {
 export const selectPosts = (state) => state.posts.posts;
 export const selectSort = (state) => state.posts.sort;
 export const selectFilter = (state) => state.posts.filter;
+export const selectStatus = (state) => state.posts.status;
 
 export default postsSlice.reducer;

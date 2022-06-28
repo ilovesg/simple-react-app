@@ -1,56 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table, Button } from 'react-bootstrap';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import PostItem from './PostItem';
-import PostsForm from './PostForm';
-import PostsFilter from './PostsFilter';
-import Modal from '../modal/Modal';
+import { Button } from 'react-bootstrap';
 import {
   definePosts,
-  sortPosts,
-  selectSort,
-  selectPosts,
-  selectFilter,
   addPostsAsync,
+  selectStatus,
 } from './postsSlice';
-import styles from './PostList.module.scss';
-import usePosts from './usePosts';
+import PostTable from './PostTable';
+import Loader from '../loader/Loader';
 
-export default function PostsList() {
+export default function PostList({ posts, setVisible }) {
   const dispatch = useDispatch();
-  const posts = useSelector(selectPosts);
-  const sort = useSelector(selectSort);
-  const filter = useSelector(selectFilter);
-  const [modal, setModal] = useState(false);
-
-  useEffect(() => {
-    dispatch(addPostsAsync());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(sortPosts(sort));
-  }, [dispatch, posts, sort]);
-
-  const sortHandler = (field = sort.field) => {
-    if (field === sort.field) {
-      const order = (sort.order === 'asc') ? 'desc' : 'asc';
-
-      dispatch(sortPosts({ field, order }));
-    } else {
-      dispatch(sortPosts({ field, order: 'asc' }));
-    }
-  };
-
-  const resultPosts = usePosts(posts, filter);
+  const status = useSelector(selectStatus);
 
   return (
-    <div className="post-list">
-      <h1>Post list</h1>
-      <PostsFilter />
+    <div>
       <h2 className="d-flex">
-        Posts
-        <Button variant="primary" type="button" className="ms-2" onClick={() => setModal(true)}>
+        Post list
+        <Button variant="primary" type="button" className="ms-2" onClick={() => setVisible(true)}>
           Create post
         </Button>
         <Button variant="primary" type="button" className="ms-2" onClick={() => dispatch(addPostsAsync())}>
@@ -60,75 +27,9 @@ export default function PostsList() {
           Clear posts
         </Button>
       </h2>
-      <Modal visible={modal} setVisible={setModal}>
-        <PostsForm setVisible={setModal} />
-      </Modal>
-      {resultPosts.length !== 0 ? (
-        <Table responsive>
-          <thead>
-            <tr>
-              <th>
-                <button
-                  type="button"
-                  className={
-                    sort.field === 'id'
-                      ? [styles['sort-button'], styles[`sort-button--${sort.order}`]].join(' ')
-                      : styles['sort-button']
-                  }
-                  onClick={() => sortHandler('id')}
-                >
-                  ID
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  className={
-                    sort.field === 'title'
-                      ? [styles['sort-button'], styles[`sort-button--${sort.order}`]].join(' ')
-                      : styles['sort-button']
-                  }
-                  onClick={() => sortHandler('title')}
-                >
-                  Title
-                </button>
-              </th>
-              <th>
-                <button
-                  type="button"
-                  className={
-                    sort.field === 'body'
-                      ? [styles['sort-button'], styles[`sort-button--${sort.order}`]].join(' ')
-                      : styles['sort-button']
-                  }
-                  onClick={() => sortHandler('body')}
-                >
-                  Body
-                </button>
-              </th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <TransitionGroup component="tbody">
-            {resultPosts.map((post) => (
-              <CSSTransition
-                timeout={300}
-                key={post.id}
-                classNames={{
-                  enter: styles['post-enter'],
-                  enterActive: styles['post-enter-active'],
-                  exit: styles['post-exit'],
-                  exitActive: styles['post-exit-active'],
-                }}
-              >
-                <PostItem post={post} className={styles.post} />
-              </CSSTransition>
-            ))}
-          </TransitionGroup>
-        </Table>
-      ) : (
-        'No posts found.'
-      )}
+      {status === 'idle'
+        ? <PostTable posts={posts} />
+        : <Loader />}
     </div>
   );
 }
