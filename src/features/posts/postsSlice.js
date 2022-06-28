@@ -44,10 +44,10 @@ export const postsSlice = createSlice({
         const b = post2[payload.field];
 
         if (payload.field === 'id') {
-          return compareAsNumbers(a, b);
+          return compareAsNumbers(a, b, payload.order);
         }
 
-        return compareAsStrings(a, b);
+        return compareAsStrings(a, b, payload.order);
       });
     },
     defineFilter: (state, { payload }) => {
