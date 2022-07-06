@@ -1,26 +1,17 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  addPost,
-  selectPosts,
-  selectSort,
-  sortPosts,
-} from './postsSlice';
+import { useAddPostMutation } from './postsAPI';
 
 export default function PostForm({ setVisible }) {
-  const dispatch = useDispatch();
-  const sort = useSelector(selectSort);
-  const posts = useSelector(selectPosts);
   const [post, setPost] = useState({ title: '', body: '' });
+  const [addPost, { isLoading: isAdding }] = useAddPostMutation();
 
-  const addNewPost = (event) => {
+  const addNewPost = async (event) => {
     event.preventDefault();
 
     if (post.title === '' || post.body === '') return;
 
-    dispatch(addPost({ ...post, id: posts.length + 1 }));
-    dispatch(sortPosts(sort));
+    await addPost(post);
 
     setPost({ title: '', body: '' });
     setVisible(false);
@@ -38,8 +29,8 @@ export default function PostForm({ setVisible }) {
           <Form.Label>Post body</Form.Label>
           <Form.Control as="textarea" placeholder="Enter post body..." rows={3} value={post.body} onChange={(event) => setPost({ ...post, body: event.target.value })} />
         </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
+        <Button variant="primary" type="submit" disabled={isAdding}>
+          {isAdding ? 'Adding...' : 'Submit'}
         </Button>
       </Form>
     </div>

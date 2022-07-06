@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table } from 'react-bootstrap';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import PostItem from './PostItem';
-import { selectSort, sortPosts } from './postsSlice';
+import { selectSort, defineSort } from './postsSlice';
 import styles from './PostTable.module.scss';
 
 export default function PostList({ posts }) {
@@ -14,9 +14,9 @@ export default function PostList({ posts }) {
     if (field === sort.field) {
       const order = (sort.order === 'asc') ? 'desc' : 'asc';
 
-      dispatch(sortPosts({ field, order }));
+      dispatch(defineSort({ field, order }));
     } else {
-      dispatch(sortPosts({ field, order: 'asc' }));
+      dispatch(defineSort({ field, order: 'asc' }));
     }
   };
 

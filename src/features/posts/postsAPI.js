@@ -1,21 +1,31 @@
-import axios from 'axios';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export default function fetchPosts() {
-  return axios.get('https://jsonplaceholder.typicode.com/posts');
-}
+const postsApi = createApi({
+  reducerPath: 'postsApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com/' }),
+  endpoints: (builder) => ({
+    getPosts: builder.query({
+      query: () => 'posts',
+    }),
+    addPost: builder.mutation({
+      query: (post) => ({
+        url: 'posts',
+        method: 'POST',
+        body: JSON.stringify(post),
+      }),
+    }),
+    deletePost: builder.mutation({
+      query: (id) => ({
+        url: `post/${id}`,
+        method: 'DELETE',
+      }),
+    }),
+  }),
+});
 
-export const compareAsNumbers = (a, b, order) => {
-  if (order === 'asc') {
-    return a - b;
-  }
-
-  return b - a;
-};
-
-export const compareAsStrings = (a, b, order) => {
-  if (order === 'asc') {
-    return a.toString().localeCompare(b);
-  }
-
-  return b.toString().localeCompare(a);
-};
+export default postsApi;
+export const {
+  useGetPostsQuery,
+  useAddPostMutation,
+  useDeletePostMutation,
+} = postsApi;

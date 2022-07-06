@@ -1,27 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import PostList from './PostList';
 import PostsForm from './PostForm';
 import PostsFilter from './PostsFilter';
 import Modal from '../modal/Modal';
 import {
-  selectPosts,
   selectFilter,
-  addPostsAsync,
+  selectSort,
 } from './postsSlice';
 import usePosts from './usePosts';
+import { useGetPostsQuery } from './postsAPI';
 
 export default function Posts() {
-  const dispatch = useDispatch();
-  const posts = useSelector(selectPosts);
   const filter = useSelector(selectFilter);
+  const sort = useSelector(selectSort);
   const [modal, setModal] = useState(false);
-
-  useEffect(() => {
-    dispatch(addPostsAsync());
-  }, [dispatch]);
-
-  const resultPosts = usePosts(posts, filter);
+  const { data = [], isLoading } = useGetPostsQuery();
+  const resultPosts = usePosts(data, filter, sort);
 
   return (
     <div className="post-list">
@@ -30,7 +25,7 @@ export default function Posts() {
       <Modal visible={modal} setVisible={setModal}>
         <PostsForm setVisible={setModal} />
       </Modal>
-      <PostList posts={resultPosts} setVisible={setModal} />
+      <PostList posts={resultPosts} setVisible={setModal} isLoading={isLoading} />
     </div>
   );
 }
