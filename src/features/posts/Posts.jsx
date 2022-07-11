@@ -15,7 +15,10 @@ export default function Posts() {
   const filter = useSelector(selectFilter);
   const sort = useSelector(selectSort);
   const [modal, setModal] = useState(false);
-  const { data = [], isLoading } = useGetPostsQuery();
+  const {
+    data = [],
+    isLoading,
+  } = useGetPostsQuery();
   const resultPosts = usePosts(data, filter, sort);
 
   return (
@@ -25,7 +28,11 @@ export default function Posts() {
       <Modal visible={modal} setVisible={setModal}>
         <PostsForm setVisible={setModal} />
       </Modal>
-      <PostList posts={resultPosts} setVisible={setModal} isLoading={isLoading} />
+      <PostList
+        posts={resultPosts}
+        setVisible={setModal}
+        isLoading={isLoading}
+      />
     </div>
   );
 }

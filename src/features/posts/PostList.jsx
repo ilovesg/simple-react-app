@@ -3,7 +3,11 @@ import { Button } from 'react-bootstrap';
 import PostTable from './PostTable';
 import Loader from '../loader/Loader';
 
-export default function PostList({ posts, isLoading, setVisible }) {
+export default function PostList({
+  posts,
+  isLoading,
+  setVisible,
+}) {
   return (
     <div>
       <h2 className="d-flex">
@@ -12,9 +16,7 @@ export default function PostList({ posts, isLoading, setVisible }) {
           Create post
         </Button>
       </h2>
-      {!isLoading
-        ? <PostTable posts={posts} />
-        : <Loader />}
+      {isLoading ? <Loader /> : <PostTable posts={posts} />}
     </div>
   );
 }
