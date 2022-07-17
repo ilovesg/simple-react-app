@@ -1,14 +1,15 @@
 import React from 'react';
-import Counter from './features/counter/Counter';
+import Container from 'react-bootstrap/Container';
 import './App.scss';
+import { ToastContainer, toast } from 'react-toastify';
+import Posts from './features/posts/Posts';
 
 function App() {
   return (
-    <div className="container">
-      <header className="app-header">
-        <Counter />
-      </header>
-    </div>
+    <Container>
+      <ToastContainer />
+      <Posts toast={toast} />
+    </Container>
   );
 }
 
