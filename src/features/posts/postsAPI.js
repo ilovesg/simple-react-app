@@ -6,10 +6,11 @@ const postsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001/' }),
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => 'posts',
+      query: (page = 1, limit = 10) => `posts?_page=${page}&_limit=${limit}`,
+      transformResponse: (response, meta) => ({ response, totalCount: +meta.response.headers.get('X-Total-Count') }),
       providesTags: (result) => (result
         ? [
-          ...result.map(({ id }) => ({ type: 'Posts', id })),
+          ...result.response.map(({ id }) => ({ type: 'Posts', id })),
           { type: 'Posts', id: 'LIST' },
         ]
         : [{ type: 'Posts', id: 'LIST' }]),

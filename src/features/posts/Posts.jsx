@@ -6,20 +6,23 @@ import PostsFilter from './PostsFilter';
 import Modal from '../modal/Modal';
 import {
   selectFilter,
+  selectPager,
   selectSort,
 } from './postsSlice';
 import usePosts from './usePosts';
 import { useGetPostsQuery } from './postsAPI';
+import Pager from '../pager/Pager';
 
 export default function Posts() {
   const filter = useSelector(selectFilter);
   const sort = useSelector(selectSort);
   const [modal, setModal] = useState(false);
+  const { currentPage } = useSelector(selectPager);
   const {
-    data = [],
+    data = { response: [], totalCount: 0 },
     isLoading,
-  } = useGetPostsQuery();
-  const resultPosts = usePosts(data, filter, sort);
+  } = useGetPostsQuery(currentPage);
+  const resultPosts = usePosts(data.response, filter, sort);
 
   return (
     <div className="post-list">
@@ -33,6 +36,7 @@ export default function Posts() {
         setVisible={setModal}
         isLoading={isLoading}
       />
+      {data.totalCount ? <Pager totalCount={data.totalCount} /> : ''}
     </div>
   );
 }

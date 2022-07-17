@@ -9,6 +9,10 @@ const initialState = {
     filterBy: 'title',
     filterQuery: '',
   },
+  pager: {
+    currentPage: 1,
+    limit: 10,
+  },
 };
 
 export const postsSlice = createSlice({
@@ -21,15 +25,20 @@ export const postsSlice = createSlice({
     defineSort: (state, { payload }) => {
       state.sort = payload;
     },
+    definePager: (state, { payload }) => {
+      state.pager = payload;
+    },
   },
 });
 
 export const {
   defineFilter,
   defineSort,
+  definePager,
 } = postsSlice.actions;
 
 export const selectFilter = (state) => state.posts.filter;
 export const selectSort = (state) => state.posts.sort;
+export const selectPager = (state) => state.posts.pager;
 
 export default postsSlice.reducer;

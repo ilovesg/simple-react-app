@@ -6,7 +6,7 @@ import PostItem from './PostItem';
 import { selectSort, defineSort } from './postsSlice';
 import styles from './PostTable.module.scss';
 
-export default function PostList({ posts }) {
+export default function PostTable({ posts }) {
   const dispatch = useDispatch();
   const sort = useSelector(selectSort);
 
@@ -21,7 +21,7 @@ export default function PostList({ posts }) {
   };
 
   return (
-    <div>
+    <div className="mb-2">
       {posts.length !== 0 ? (
         <Table responsive>
           <thead>
