@@ -6,6 +6,7 @@ import {
   Route,
 } from 'react-router-dom';
 import Posts from './features/posts/Posts';
+import Post from './features/posts/Post';
 import About from './pages/About';
 import PageNotFound from './pages/PageNotFound';
 import Layout from './layout/Layout';
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Posts toast={toast} />} />
+          <Route path="/posts/:id" element={<Post />} />
           <Route path="about" element={<About />} />
           <Route path="*" element={<PageNotFound />} />
         </Route>
