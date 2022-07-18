@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Navigation from '../features/navigation/Navigation';
 import styles from './Layout.module.scss';
 
@@ -21,7 +21,7 @@ export default function Layout() {
             Made by Yaroslav Gafuanov
             {' '}
             (
-            <Link to={{ pathname: 'https://github.com/ilovesg/' }} target="_blank">GitHub profile</Link>
+            <a href="https://github.com/ilovesg/" target="_blank" rel="noreferrer">GitHub profile</a>
             ),
             {' '}
             2022
