@@ -15,6 +15,9 @@ const postsApi = createApi({
         ]
         : [{ type: 'Posts', id: 'LIST' }]),
     }),
+    getPost: builder.query({
+      query: (id = 1) => `posts/${id}`,
+    }),
     addPost: builder.mutation({
       query: (post) => ({
         url: 'posts',
@@ -36,6 +39,7 @@ const postsApi = createApi({
 export default postsApi;
 export const {
   useGetPostsQuery,
+  useGetPostQuery,
   useAddPostMutation,
   useDeletePostMutation,
 } = postsApi;
