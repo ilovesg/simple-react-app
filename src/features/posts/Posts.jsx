@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import PostList from './PostList';
 import PostsForm from './PostForm';
-import PostsFilter from './PostsFilter';
+import PostFilter from './PostFilter';
 import Modal from '../modal/Modal';
 import {
   selectFilter,
@@ -27,7 +27,7 @@ export default function Posts() {
   return (
     <div className="post-list">
       <h1>Posts</h1>
-      <PostsFilter />
+      <PostFilter />
       <Modal visible={modal} setVisible={setModal}>
         <PostsForm setVisible={setModal} />
       </Modal>
