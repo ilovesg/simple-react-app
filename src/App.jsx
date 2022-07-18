@@ -1,5 +1,4 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
 import './App.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import {
@@ -9,17 +8,20 @@ import {
 import Posts from './features/posts/Posts';
 import About from './pages/About';
 import PageNotFound from './pages/PageNotFound';
+import Layout from './layout/Layout';
 
 function App() {
   return (
-    <Container>
+    <div>
       <ToastContainer />
       <Routes>
-        <Route index path="/" element={<Posts toast={toast} />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<PageNotFound />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Posts toast={toast} />} />
+          <Route path="about" element={<About />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Route>
       </Routes>
-    </Container>
+    </div>
   );
 }
 
