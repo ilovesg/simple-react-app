@@ -18,6 +18,9 @@ const postsApi = createApi({
     getPost: builder.query({
       query: (id = 1) => `posts/${id}`,
     }),
+    getPostComments: builder.query({
+      query: (id = 1) => `posts/${id}/comments`,
+    }),
     addPost: builder.mutation({
       query: (post) => ({
         url: 'posts',
@@ -40,6 +43,7 @@ export default postsApi;
 export const {
   useGetPostsQuery,
   useGetPostQuery,
+  useGetPostCommentsQuery,
   useAddPostMutation,
   useDeletePostMutation,
 } = postsApi;
