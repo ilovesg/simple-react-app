@@ -7,7 +7,7 @@ import {
   Dropdown,
   DropdownButton,
 } from 'react-bootstrap';
-import { defineFilter, selectFilter } from './postsSlice';
+import { defineFilter, selectFilter } from '../postsSlice';
 
 export default function PostFilter() {
   const dispatch = useDispatch();

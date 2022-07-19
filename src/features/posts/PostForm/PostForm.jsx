@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import { useAddPostMutation } from './postsAPI';
+import { useAddPostMutation } from '../postsAPI';
 
 export default function PostForm({ setVisible }) {
   const [post, setPost] = useState({

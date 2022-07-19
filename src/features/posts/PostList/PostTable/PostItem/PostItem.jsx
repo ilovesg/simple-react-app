@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import { useDeletePostMutation } from './postsAPI';
+import { Link } from 'react-router-dom';
+import { useDeletePostMutation } from '../../../postsAPI';
 
 export default function PostItem({ post }) {
   const [deletePost, { isLoading }] = useDeletePostMutation();
@@ -31,7 +32,7 @@ export default function PostItem({ post }) {
   return (
     <tr>
       <td>{post.id}</td>
-      <td>{post.title}</td>
+      <td><Link to={`posts/${post.id}`}>{post.title}</Link></td>
       <td>{post.body}</td>
       <td>
         <Button variant="danger" onClick={() => deletePostHandler(post.id)} disabled={isLoading}>
