@@ -6,6 +6,7 @@ import {
 import { toast } from 'react-toastify';
 import Posts from '../../features/posts/Posts';
 import Post from '../../features/posts/PostList/PostTable/PostItem/Post/Post';
+import Home from '../../pages/Home';
 import About from '../../pages/About';
 import PageNotFound from '../../pages/PageNotFound';
 import Layout from '../../layout/Layout';
@@ -14,8 +15,9 @@ export default function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Posts toast={toast} />} />
-        <Route path="/posts/:id" element={<Post />} />
+        <Route index element={<Home />} />
+        <Route path="posts" element={<Posts toast={toast} />} />
+        <Route path="posts/:id" element={<Post />} />
         <Route path="about" element={<About />} />
         <Route path="*" element={<PageNotFound />} />
       </Route>
