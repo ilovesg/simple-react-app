@@ -4,11 +4,11 @@ import {
   Route,
 } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Posts from '../features/posts/Posts';
-import Post from '../features/posts/PostList/PostTable/PostItem/Post/Post';
-import About from '../pages/About';
-import PageNotFound from '../pages/PageNotFound';
-import Layout from '../layout/Layout';
+import Posts from '../../features/posts/Posts';
+import Post from '../../features/posts/PostList/PostTable/PostItem/Post/Post';
+import About from '../../pages/About';
+import PageNotFound from '../../pages/PageNotFound';
+import Layout from '../../layout/Layout';
 
 export default function AppRouter() {
   return (
