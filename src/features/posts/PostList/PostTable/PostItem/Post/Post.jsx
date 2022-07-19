@@ -31,7 +31,7 @@ export default function Post() {
         <PostComments comments={comments} />
       )
         : <Loader />}
-      <p><Link to="/">Go back to post list</Link></p>
+      <p><Link to="/posts">Go back to post list</Link></p>
     </div>
   );
 }
