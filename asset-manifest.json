@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/simple-react-app/static/css/main.60c16a44.css",
-    "main.js": "/simple-react-app/static/js/main.7a6ce41c.js",
+    "main.css": "/simple-react-app/static/css/main.6a79d915.css",
+    "main.js": "/simple-react-app/static/js/main.1ec5bb6e.js",
     "static/media/favicon.png": "/simple-react-app/static/media/favicon.415d4664db760e13bc7f.png",
     "index.html": "/simple-react-app/index.html",
-    "main.60c16a44.css.map": "/simple-react-app/static/css/main.60c16a44.css.map",
-    "main.7a6ce41c.js.map": "/simple-react-app/static/js/main.7a6ce41c.js.map"
+    "main.6a79d915.css.map": "/simple-react-app/static/css/main.6a79d915.css.map",
+    "main.1ec5bb6e.js.map": "/simple-react-app/static/js/main.1ec5bb6e.js.map"
   },
   "entrypoints": [
-    "static/css/main.60c16a44.css",
-    "static/js/main.7a6ce41c.js"
+    "static/css/main.6a79d915.css",
+    "static/js/main.1ec5bb6e.js"
   ]
 }
