@@ -1,24 +1,34 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useGetPostQuery } from './postsAPI';
+import { useGetPostQuery, useGetPostCommentsQuery } from './postsAPI';
 import Loader from '../loader/Loader';
+import PostComments from './PostComments';
 
 export default function Post() {
   const { id } = useParams();
 
   const {
-    data,
-    isLoading,
+    data: post = {},
+    isLoading: isPostLoading,
   } = useGetPostQuery(id);
+
+  const {
+    data: comments = [],
+    isLoading: isCommentsLoading,
+  } = useGetPostCommentsQuery(id);
 
   return (
     <div>
-      {!isLoading ? (
-        <article className="text-center">
-          <h1>{`Post ${data.id}: ${data.title}`}</h1>
-          <p>{data.body}</p>
-          <span>{`Author ID: ${data.userId}`}</span>
+      {!isPostLoading ? (
+        <article className="mb-2 text-center">
+          <h1>{`Post ${post.id}: ${post.title}`}</h1>
+          <p>{post.body}</p>
+          <span>{`Author ID: ${post.userId}`}</span>
         </article>
+      )
+        : <Loader />}
+      {!isCommentsLoading ? (
+        <PostComments comments={comments} />
       )
         : <Loader />}
     </div>
