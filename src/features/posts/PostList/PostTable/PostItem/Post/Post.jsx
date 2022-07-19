@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useGetPostQuery, useGetPostCommentsQuery } from '../../../../postsAPI';
 import Loader from '../../../../../loader/Loader';
 import PostComments from './PostComments/PostComments';
@@ -31,6 +31,7 @@ export default function Post() {
         <PostComments comments={comments} />
       )
         : <Loader />}
+      <p><Link to="/">Go back to post list</Link></p>
     </div>
   );
 }
