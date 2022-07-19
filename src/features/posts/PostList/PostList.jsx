@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import PostTable from './PostTable';
-import Loader from '../loader/Loader';
+import PostTable from './PostTable/PostTable';
+import Loader from '../../loader/Loader';
 
 export default function PostList({
   posts,

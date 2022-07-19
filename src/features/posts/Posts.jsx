@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import PostList from './PostList';
-import PostsForm from './PostForm';
-import PostFilter from './PostFilter';
+import PostList from './PostList/PostList';
+import PostsForm from './PostForm/PostForm';
+import PostFilter from './PostFilter/PostFilter';
 import Modal from '../modal/Modal';
 import {
   selectFilter,

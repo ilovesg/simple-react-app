@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-import { useDeletePostMutation } from './postsAPI';
+import { useDeletePostMutation } from '../../../postsAPI';
 
 export default function PostItem({ post }) {
   const [deletePost, { isLoading }] = useDeletePostMutation();

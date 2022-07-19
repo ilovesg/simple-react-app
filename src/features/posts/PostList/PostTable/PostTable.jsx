@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Table } from 'react-bootstrap';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import PostItem from './PostItem';
-import { selectSort, defineSort } from './postsSlice';
+import PostItem from './PostItem/PostItem';
+import { selectSort, defineSort } from '../../postsSlice';
 import styles from './PostTable.module.scss';
 
 export default function PostTable({ posts }) {
