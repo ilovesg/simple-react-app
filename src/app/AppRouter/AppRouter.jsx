@@ -9,7 +9,7 @@ import getRoutes from './routes';
 import Layout from '../../layout/Layout';
 
 export default function AppRouter() {
-  const isAuthorized = useSelector(selectAuthorization);
+  const { isAuthorized } = useSelector(selectAuthorization);
 
   return (
     <Routes>

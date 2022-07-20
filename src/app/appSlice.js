@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isAuthorized: false,
+  authorization: {
+    isAuthorized: false,
+    username: '',
+  },
 };
 
 export const appSlice = createSlice({
@@ -9,7 +12,7 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     defineAuthorization: (state, { payload }) => {
-      state.isAuthorized = payload;
+      state.authorization = payload;
     },
   },
 });
@@ -18,6 +21,6 @@ export const {
   defineAuthorization,
 } = appSlice.actions;
 
-export const selectAuthorization = (state) => state.app.isAuthorized;
+export const selectAuthorization = (state) => state.app.authorization;
 
 export default appSlice.reducer;
