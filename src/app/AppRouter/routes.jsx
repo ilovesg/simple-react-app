@@ -6,6 +6,7 @@ import Home from '../../pages/Home';
 import About from '../../pages/About';
 import PageNotFound from '../../pages/PageNotFound';
 import Login from '../../pages/Login';
+import AccessDenied from '../../pages/AccessDenied';
 
 export default function getRoutes(isAuthorized) {
   const publicRoutes = [
@@ -21,5 +22,14 @@ export default function getRoutes(isAuthorized) {
     { path: 'posts/:id', element: <Post /> },
   ];
 
-  return isAuthorized ? privateRoutes : publicRoutes;
+  const routes = [
+    ...publicRoutes,
+    ...privateRoutes.map(
+      (privateRoute) => (
+        (!isAuthorized) ? { ...privateRoute, element: <AccessDenied /> } : privateRoute
+      ),
+    ),
+  ];
+
+  return routes;
 }
