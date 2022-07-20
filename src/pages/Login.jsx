@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { defineAuthorization, selectAuthorization } from '../app/appSlice';
 
 export default function Login() {
@@ -10,6 +11,12 @@ export default function Login() {
 
   const loginHandler = (event) => {
     event.preventDefault();
+
+    if (!username) {
+      toast.error('Username must not be empty!');
+
+      return;
+    }
 
     dispatch(defineAuthorization({ isAuthorized: true, username }));
   };
@@ -32,10 +39,6 @@ export default function Login() {
           <Form.Group className="mb-3">
             <Form.Label>Username</Form.Label>
             <Form.Control type="text" placeholder="Enter username" value={username} onChange={(event) => setUsername(event.target.value)} />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Enter password" />
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit
