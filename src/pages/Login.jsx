@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { defineAuthorization } from '../app/appSlice';
+import { defineAuthorization, selectAuthorization } from '../app/appSlice';
 
 export default function Login() {
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
+  const { isAuthorized } = useSelector(selectAuthorization);
 
   const loginHandler = (event) => {
     event.preventDefault();
@@ -16,19 +17,31 @@ export default function Login() {
   return (
     <div>
       <h1>Login</h1>
-      <Form className="mb-3" onSubmit={loginHandler}>
-        <Form.Group className="mb-3">
-          <Form.Label>Username</Form.Label>
-          <Form.Control type="text" placeholder="Enter username" value={username} onChange={(event) => setUsername(event.target.value)} />
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Enter password" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
+      {isAuthorized ? (
+        <div>
+          Signed in as:
+          {' '}
+          {username}
+          .
+          {' '}
+          <br />
+          <Button variant="link" className="p-0" onClick={() => dispatch(defineAuthorization({ isAuthorized: false, username: '' }))}>Logout</Button>
+        </div>
+      ) : (
+        <Form className="mb-3" onSubmit={loginHandler}>
+          <Form.Group className="mb-3">
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" placeholder="Enter username" value={username} onChange={(event) => setUsername(event.target.value)} />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Enter password" />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+      )}
     </div>
   );
 }
