@@ -46,7 +46,7 @@ export default function PostForm({ setVisible }) {
   };
 
   return (
-    <div className="post-list__form">
+    <div>
       <h2>Add post</h2>
       <Form className="mb-3" onSubmit={addPostHandler}>
         <Form.Group className="mb-3" controlId="post-title">
