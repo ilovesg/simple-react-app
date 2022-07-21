@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function AccessDenied() {
   return (
-    <div>
+    <>
       <h1>Access denied</h1>
       <p>
         We apologize for any inconvenience caused. Please,
@@ -12,6 +12,6 @@ export default function AccessDenied() {
         {' '}
         and try again.
       </p>
-    </div>
+    </>
   );
 }

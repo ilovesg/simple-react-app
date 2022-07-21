@@ -22,7 +22,7 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <>
       <h1>Login</h1>
       {isAuthorized ? (
         <div>
@@ -45,6 +45,6 @@ export default function Login() {
           </Button>
         </Form>
       )}
-    </div>
+    </>
   );
 }

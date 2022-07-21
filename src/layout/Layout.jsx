@@ -6,7 +6,7 @@ import styles from './Layout.module.scss';
 
 export default function Layout() {
   return (
-    <div>
+    <>
       <header>
         <Navigation />
       </header>
@@ -28,6 +28,6 @@ export default function Layout() {
           </div>
         </Container>
       </footer>
-    </div>
+    </>
   );
 }

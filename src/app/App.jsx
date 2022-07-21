@@ -5,10 +5,10 @@ import AppRouter from './AppRouter/AppRouter';
 
 function App() {
   return (
-    <div>
+    <>
       <ToastContainer />
       <AppRouter />
-    </div>
+    </>
   );
 }
 
