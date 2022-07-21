@@ -15,7 +15,7 @@ export default function Layout() {
           <Outlet />
         </Container>
       </main>
-      <footer className={styles.copyright}>
+      <footer className={styles.footer}>
         <Container>
           <div className="py-4 text-center">
             Made by Yaroslav Gafuanov
