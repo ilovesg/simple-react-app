@@ -25,7 +25,7 @@ export default function Posts() {
   const resultPosts = usePosts(data.response, filter, sort);
 
   return (
-    <div className="post-list">
+    <>
       <h1>Posts</h1>
       <PostFilter />
       <Modal visible={modal} setVisible={setModal}>
@@ -37,6 +37,6 @@ export default function Posts() {
         isLoading={isLoading}
       />
       {data.totalCount ? <Pager totalCount={data.totalCount} /> : ''}
-    </div>
+    </>
   );
 }
